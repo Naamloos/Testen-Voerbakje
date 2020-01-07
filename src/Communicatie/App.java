@@ -8,8 +8,9 @@ public class App
 
     }
 
-    public void StuurNotificatie(String message)
+    public void StuurNotificatie(Notification notification)
     {
-        // TODO doe iets met de notification, bijvoorbeeld opslaan of gewoon een println
+        // TODO move down to notification
+        System.out.println("(APP) " + notification.getDate() + " @ " + notification.getTime() + " | " + notification.getMessage());
     }
 }
