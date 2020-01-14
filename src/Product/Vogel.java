@@ -15,10 +15,11 @@ public class Vogel
     public void eetVoer()
     {
         voerNiveau = bakje.getVoer();
-        if(voerNiveau >= 50)
+        if (voerNiveau >= 50)
         {
             voerNiveau -= 50;
             bakje.setVoer(voerNiveau);
         }
+
     }
 }
