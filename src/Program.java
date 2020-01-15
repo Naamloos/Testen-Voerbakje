@@ -35,7 +35,7 @@ public class Program
                 String input = reader.readLine();
 
                 switch(input){
-                    case "eet":
+                    case "eet": //Vogel eet voer.
                         if(bakje.getStroom() > 0)
                         {
                             voerNiveau = bakje.getVoer();
@@ -50,18 +50,18 @@ public class Program
                         }
                         break;
 
-                    case "laad":
+                    case "laad": //laat het bakje op
                         bakje.addStroom();
                         stroomThread = new Thread(bakje);
                         stroomThread.start();
                         break;
 
-                    case "vul":
+                    case "vul": //Vul het bakje bij
                         bakje.addVoer(100);
                         System.out.println("Voer is bij gevuld");
                         break;
 
-                    case "stroom":
+                    case "stroom": //Laat de batterij op
                         int stroom = bakje.getStroom();
                         if (stroom > 0)
                         {
