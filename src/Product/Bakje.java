@@ -31,6 +31,7 @@ public class Bakje implements Runnable
         else if(gramVoer < 50)
         {
             System.out.println("Er zit niet genoeg voer in het bakje");
+            System.out.println("Bakje is niet open gegaan");
         }
         this.gramVoer = gramVoer;
     }
