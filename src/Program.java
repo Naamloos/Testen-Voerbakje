@@ -3,6 +3,8 @@ import Communicatie.Notification;
 import Product.Bakje;
 import Product.Vogel;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,6 +17,7 @@ public class Program
 
     public static void main(String[] args)
     {
+        System.out.println("Commandos: eet, laad, vul, exit");
         // Welkom welkom in dit programma
         Notification not = new Notification("test", LocalDate.now(), LocalTime.now());
         app = new App();
@@ -28,18 +31,46 @@ public class Program
         Thread stroomThread = new Thread(bakje);
         stroomThread.start();
 
+        boolean running = true;
         try {
-            while(true) {
-                System.in.read();
-                voerNiveau = bakje.getVoer();
-                if(voerNiveau > 49)
-                {
-                    System.out.println("vogel at");
+            while(running) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                String input = reader.readLine();
+
+                switch(input){
+                    case "eet":
+                        if(bakje.getStroom() > 0)
+                        {
+                            voerNiveau = bakje.getVoer();
+                            if (voerNiveau > 49)
+                            {
+                                System.out.println("vogel at");
+                            }
+                            vogel.eetVoer();
+                        }
+                        else {
+                            System.out.println("Bakje heeft geen stroom!");
+                        }
+                        break;
+
+                    case "laad":
+                        bakje.addStroom();
+                        stroomThread = new Thread(bakje);
+                        stroomThread.start();
+                        break;
+
+                    case "vul":
+                        bakje.addVoer(100);
+
+                    case "exit":
+                        running = false;
+                        break;
                 }
-                vogel.eetVoer();
             }
         }catch (java.io.IOException ex){
 
         }
+
+        bakje.stopBakje();
     }
 }

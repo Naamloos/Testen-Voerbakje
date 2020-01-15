@@ -36,6 +36,11 @@ public class Bakje implements Runnable
         this.gramVoer = gramVoer;
     }
 
+    public void addVoer(int gramVoer)
+    {
+        this.gramVoer += gramVoer;
+    }
+
     public int getStroom()
     {
         return this.stroom;
@@ -51,26 +56,41 @@ public class Bakje implements Runnable
         this.stroom = 100;
     }
 
+    private boolean running = false;
     public synchronized void run() {
 
-        while (stroom > 0) {
-            System.out.println(stroom);
-            stroom -= 1;
-            if (stroom == 20) {
-                Notification not = new Notification("Stroom is bijna op", LocalDate.now(), LocalTime.now());
-                app.StuurNotificatie(not);
-            }
-            else if (stroom == 0)
+        if(!running)
+        {
+            running = true;
+            while (stroom > 0)
             {
-                app.StuurNotificatie(new Notification("Stroom is op", LocalDate.now(), LocalTime.now()));
-            }
+                System.out.println(stroom);
+                stroom -= 1;
+                if (stroom == 20)
+                {
+                    Notification not = new Notification("Stroom is bijna op", LocalDate.now(), LocalTime.now());
+                    app.StuurNotificatie(not);
+                } else if (stroom == 0)
+                {
+                    app.StuurNotificatie(new Notification("Stroom is op", LocalDate.now(), LocalTime.now()));
+                }
 
-            try {
-                this.wait(1500);
-            } catch (InterruptedException e) {
+                try
+                {
+                    this.wait(2000);
+                }
+                catch (InterruptedException e)
+                {
 
-                e.printStackTrace();
+                    e.printStackTrace();
+                }
             }
+            running = false;
         }
+    }
+
+    public void stopBakje()
+    {
+        this.running = false;
     }
 }
