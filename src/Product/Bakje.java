@@ -26,12 +26,16 @@ public class Bakje implements Runnable
     {
         if(gramVoer < 100 && gramVoer >= 50)
         {
-            System.out.println("Het voer is bijna op");
+            Notification not = new Notification("Het voer is bijna op", LocalDate.now(), LocalTime.now());
+            app.StuurNotificatie(not);
         }
         else if(gramVoer < 50)
         {
-            System.out.println("Er zit niet genoeg voer in het bakje");
+            Notification not = new Notification("Er zit niet genoeg voer in het bakje", LocalDate.now(), LocalTime.now());
+            app.StuurNotificatie(not);
             System.out.println("Bakje is niet open gegaan");
+            //Omdat het een fisiek ding is wordt dit niet mee gegeven als notificatie
+            // maar we printen het toch even om het verhaal rond te maken.
         }
         this.gramVoer = gramVoer;
     }
@@ -56,15 +60,12 @@ public class Bakje implements Runnable
         this.stroom = 100;
     }
 
-    private boolean running = false;
     public synchronized void run() {
 
-        if(!running)
+        if(true)
         {
-            running = true;
             while (stroom > 0)
             {
-                System.out.println(stroom);
                 stroom -= 1;
                 if (stroom == 20)
                 {
@@ -85,12 +86,6 @@ public class Bakje implements Runnable
                     e.printStackTrace();
                 }
             }
-            running = false;
         }
-    }
-
-    public void stopBakje()
-    {
-        this.running = false;
     }
 }
