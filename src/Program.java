@@ -38,12 +38,13 @@ public class Program
                     case "eet": //Vogel eet voer.
                         if(bakje.getStroom() > 0)
                         {
+                            vogel.eetVoer();
                             voerNiveau = bakje.getVoer();
                             if (voerNiveau > 49)
                             {
                                 System.out.println("vogel at");
                             }
-                            vogel.eetVoer();
+
                         }
                         else {
                             System.out.println("Bakje heeft geen stroom!");

@@ -45,6 +45,7 @@ public class Bakje implements Runnable
         this.gramVoer += gramVoer;
     }
 
+
     public int getStroom()
     {
         return this.stroom;
