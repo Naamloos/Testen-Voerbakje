@@ -27,6 +27,7 @@ public class Bakje implements Runnable
 //        System.out.println(gramVoer);
         if(gramVoer < 100 && gramVoer >= 50)
         {
+<<<<<<< HEAD
             Notification not = new Notification("Een vogel heeft gegeten en het voer is nu op.", LocalDate.now(), LocalTime.now());
             app.StuurNotificatie(not);
         }
@@ -37,6 +38,13 @@ public class Bakje implements Runnable
         else{
             Notification not = new Notification("Een vogel heeft gegeten.", LocalDate.now(), LocalTime.now());
             app.StuurNotificatie(not);
+=======
+            System.out.println("Het voer is bijna op");
+        }
+        else if(gramVoer < 50)
+        {
+            System.out.println("Er zit niet genoeg voer in het bakje");
+>>>>>>> c437ddcb20d8367f6d90ed12ab7e9eaaace37fe3
         }
     }
     public void removeVoer(int amount){
@@ -61,6 +69,7 @@ public class Bakje implements Runnable
 
     }
 
+<<<<<<< HEAD
     public void printNotEnoughVoer(){
 
         Notification not = new Notification("Er zit niet genoeg voer in het bakje", LocalDate.now(), LocalTime.now());
@@ -71,6 +80,8 @@ public class Bakje implements Runnable
 
     }
 
+=======
+>>>>>>> c437ddcb20d8367f6d90ed12ab7e9eaaace37fe3
     public int getStroom()
     {
         return this.stroom;
@@ -86,13 +97,19 @@ public class Bakje implements Runnable
         this.stroom = 100;
     }
 
+    private boolean running = false;
     public synchronized void run() {
 
-        if(true)
+        if(!running)
         {
-            while (stroom > 0)
+            running = true;
+            while (stroom > 0 && running)
             {
+<<<<<<< HEAD
                 System.out.println(this.stroom);
+=======
+                System.out.println(stroom);
+>>>>>>> c437ddcb20d8367f6d90ed12ab7e9eaaace37fe3
                 stroom -= 1;
                 if (stroom == 20)
                 {
@@ -114,6 +131,12 @@ public class Bakje implements Runnable
                     e.printStackTrace();
                 }
             }
+            running = false;
         }
+    }
+
+    public void stopBakje()
+    {
+        this.running = false;
     }
 }
