@@ -20,6 +20,5 @@ public class Vogel
             voerNiveau -= 50;
             bakje.setVoer(voerNiveau);
         }
-
     }
 }
