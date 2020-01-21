@@ -61,7 +61,7 @@ public class Bakje implements Runnable
         if(!running)
         {
             running = true;
-            while (stroom > 0)
+            while (stroom > 0 && running)
             {
                 System.out.println(stroom);
                 stroom -= 1;
