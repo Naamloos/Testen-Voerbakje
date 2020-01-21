@@ -38,13 +38,8 @@ public class Program
                     case "eet": //Vogel eet voer.
                         if(bakje.getStroom() > 0)
                         {
-                            vogel.eetVoer();
                             voerNiveau = bakje.getVoer();
-                            if (voerNiveau > 49)
-                            {
-                                System.out.println("vogel at");
-                            }
-
+                            vogel.eetVoer();
                         }
                         else {
                             System.out.println("Bakje heeft geen stroom!");
@@ -53,13 +48,11 @@ public class Program
 
                     case "laad": //laat het bakje op
                         bakje.addStroom();
-                        stroomThread = new Thread(bakje);
-                        stroomThread.start();
                         break;
 
                     case "vul": //Vul het bakje bij
                         bakje.addVoer(100);
-                        System.out.println("Voer is bij gevuld");
+
                         break;
 
                     case "stroom": //Laat de batterij op

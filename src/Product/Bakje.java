@@ -24,27 +24,52 @@ public class Bakje implements Runnable
 
     public void setVoer(int gramVoer)
     {
+//        System.out.println(gramVoer);
         if(gramVoer < 100 && gramVoer >= 50)
         {
-            Notification not = new Notification("Het voer is bijna op", LocalDate.now(), LocalTime.now());
+            Notification not = new Notification("Een vogel heeft gegeten en het voer is nu op.", LocalDate.now(), LocalTime.now());
             app.StuurNotificatie(not);
         }
         else if(gramVoer < 50)
         {
-            Notification not = new Notification("Er zit niet genoeg voer in het bakje", LocalDate.now(), LocalTime.now());
-            app.StuurNotificatie(not);
-            System.out.println("Bakje is niet open gegaan");
-            //Omdat het een fisiek ding is wordt dit niet mee gegeven als notificatie
-            // maar we printen het toch even om het verhaal rond te maken.
+            printNotEnoughVoer();
         }
-        this.gramVoer = gramVoer;
+        else{
+            Notification not = new Notification("Een vogel heeft gegeten.", LocalDate.now(), LocalTime.now());
+            app.StuurNotificatie(not);
+        }
+    }
+    public void removeVoer(int amount){
+        setVoer(this.gramVoer);
+        if (this.gramVoer >= amount){
+            this.gramVoer -= amount;
+        }
     }
 
     public void addVoer(int gramVoer)
     {
-        this.gramVoer += gramVoer;
+        System.out.println(this.gramVoer);
+        if((this.gramVoer + gramVoer) <= 400){
+            this.gramVoer += gramVoer;
+            System.out.println("Voer is bij gevuld");
+        }
+        else{
+            System.out.println("Voer zit vol");
+            Notification not = new Notification("Het bakje zit vol.", LocalDate.now(), LocalTime.now());
+            app.StuurNotificatie(not);
+        }
+
     }
 
+    public void printNotEnoughVoer(){
+
+        Notification not = new Notification("Er zit niet genoeg voer in het bakje", LocalDate.now(), LocalTime.now());
+        app.StuurNotificatie(not);
+        System.out.println("Bakje is niet open gegaan");
+        //Omdat het een fisiek ding is wordt dit niet mee gegeven als notificatie
+        // maar we printen het toch even om het verhaal rond te maken.
+
+    }
 
     public int getStroom()
     {
@@ -67,11 +92,13 @@ public class Bakje implements Runnable
         {
             while (stroom > 0)
             {
+                System.out.println(this.stroom);
                 stroom -= 1;
                 if (stroom == 20)
                 {
                     Notification not = new Notification("Stroom is bijna op", LocalDate.now(), LocalTime.now());
                     app.StuurNotificatie(not);
+
                 } else if (stroom == 0)
                 {
                     app.StuurNotificatie(new Notification("Stroom is op", LocalDate.now(), LocalTime.now()));
